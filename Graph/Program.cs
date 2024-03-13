@@ -19,8 +19,7 @@
                 "\r\nGALLERY: Exquisite artwork decorates the walls." +
                 "\r\nDECK: This covered deck looks over the landscaped grounds." +
                 "\r\nEXIT: Cobblestone pathway leads you to the gardens.");
-            Console.WriteLine(  );
-            // map.ListAllVertices();
+ 
 
 
 
