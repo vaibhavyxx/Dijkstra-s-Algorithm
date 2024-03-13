@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Profiles\\vd5443\\source\\repos\\Graph\\Graph.csproj",
+      "projectUniqueName": "D:\\Profiles\\vd5443\\Source\\Repos\\Dijkstra-s-Algorithm\\Graph\\Graph.csproj",
       "projectName": "Graph",
-      "projectPath": "D:\\Profiles\\vd5443\\source\\repos\\Graph\\Graph.csproj",
+      "projectPath": "D:\\Profiles\\vd5443\\Source\\Repos\\Dijkstra-s-Algorithm\\Graph\\Graph.csproj",
       "packagesPath": "D:\\Profiles\\vd5443\\.nuget\\packages\\",
-      "outputPath": "D:\\Profiles\\vd5443\\source\\repos\\Graph\\obj\\",
+      "outputPath": "D:\\Profiles\\vd5443\\Source\\Repos\\Dijkstra-s-Algorithm\\Graph\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "Z:\\IGMProfile\\AppData\\NuGet\\NuGet.Config",

@@ -14,108 +14,46 @@ namespace Graph
 
         public Graph()
         {
-            //Making rooms and detail
-            vertices = new List<Vertex>();
+            // Define vertices
+             var vertices = new Dictionary<string, Vertex>
+            {
+                ["main hall"] = new Vertex("main hall", "The main hall is central to the house."),
+                ["library"] = new Vertex("library", "This library is packed with floor-to-ceiling bookshelves."),
+                ["conservatory"] = new Vertex("conservatory", "The glass wall allows sunlight to reach the plants here."),
+                ["billiards"] = new Vertex("billiards", "We got a pool table!"),
+                ["bathroom"] = new Vertex("bathroom", "Adorned with the finest tilework."),
+                ["study"] = new Vertex("study", "Two large chairs, a fireplace, and a bearskin rug."),
+                ["kitchen"] = new Vertex("kitchen", "Large enough to prepare a feast."),
+                ["dining room"] = new Vertex("dining room", "A huge table for sixteen has gold place settings."),
+                ["ballroom"] = new Vertex("ballroom", " A room full of balls."),
+                ["gallery"] = new Vertex("gallery", "Exquisite artwork decorates the walls."),
+                ["deck"] = new Vertex("deck", "This covered deck looks over the landscaped grounds."),
+                ["exit"] = new Vertex("exit", "Cobblestone pathway leads you to the gardens.")
+            };
 
-            Vertex mainHall = new Vertex("main hall", "The main hall is central to the house.");
-            Vertex library = new Vertex("library", "This library is packed with floor-to-ceiling bookshelves.");
-            Vertex conservatory = new Vertex("conservatory", "The glass wall allows sunlight to reach the plants here.");
-            Vertex billiards = new Vertex("billiards", "We got a pool table!");
-            Vertex bathroom = new Vertex("bathroom", "Adorned with the finest tilework.");
-            Vertex study = new Vertex("study", "Two large chairs, a fireplace, and a bearskin rug.");
-            Vertex kitchen = new Vertex("kitchen", "Large enough to prepare a feast.");
-            Vertex diningRoom = new Vertex("dining room", "A huge table for sixteen has gold place settings.");
-            Vertex ballRoom = new Vertex("ballroom", " A room full of balls.");
-            Vertex gallery = new Vertex("gallery", "Exquisite artwork decorates the walls.");
-            Vertex deck = new Vertex("deck", "This covered deck looks over the landscaped grounds.");
-            Vertex exit = new Vertex("exit", "Cobblestone pathway leads you to the gardens.");
+            // Define connections
+            var adjacency = new Dictionary<string, List<Vertex>>();
 
-            #region part1
-            vertices.Add(mainHall);
-            vertices.Add(billiards);
-            vertices.Add(study);
-            vertices.Add(library);
-            vertices.Add(diningRoom);
-            vertices.Add(kitchen);
-            vertices.Add(conservatory);
-            vertices.Add(deck);
-            vertices.Add(gallery);
-            vertices.Add(ballRoom);
-            vertices.Add(bathroom);
-            vertices.Add(exit);
+            // Define connections for each vertex
+            foreach (var vertex in vertices.Values)
+            {
+                adjacency[vertex.Room] = new List<Vertex>();
+            }
 
-            //connections
-            adjacency = new Dictionary<string, List<Vertex>>();
+            // Add connections
+            adjacency["main hall"].AddRange(new[] { vertices["deck"], vertices["gallery"], vertices["ballroom"], vertices["study"], vertices["dining room"], vertices["conservatory"] });
+            adjacency["library"].AddRange(new[] { vertices["conservatory"], vertices["main hall"] });
+            adjacency["conservatory"].AddRange(new[] { vertices["deck"], vertices["library"] });
+            adjacency["billiards"].AddRange(new[] { vertices["gallery"], vertices["bathroom"] });
+            adjacency["bathroom"].AddRange(new[] { vertices["study"], vertices["billiards"] });
+            adjacency["study"].AddRange(new[] { vertices["main hall"], vertices["bathroom"], vertices["ballroom"] });
+            adjacency["gallery"].AddRange(new[] { vertices["billiards"], vertices["ballroom"], vertices["main hall"] });
+            adjacency["deck"].AddRange(new[] { vertices["exit"], vertices["conservatory"], vertices["main hall"] });
+            adjacency["dining room"].Add(vertices["kitchen"]);
+            adjacency["kitchen"].Add(vertices["dining room"]);
+            adjacency["ballroom"].AddRange(new[] { vertices["main hall"], vertices["gallery"], vertices["study"] });
+            adjacency["exit"].Add(vertices["deck"]);
 
-            //adjacency[main hall] = new List();
-            //and then use that to add values
-            List<Vertex> hallConnections = new List<Vertex>();
-            hallConnections.Add(deck);
-            hallConnections.Add(gallery);
-            hallConnections.Add(ballRoom);
-            hallConnections.Add(study);
-            hallConnections.Add(diningRoom);
-            hallConnections.Add(conservatory);
-            adjacency["main hall"] = hallConnections;
-
-            List<Vertex> libraryConnections = new List<Vertex>();
-            libraryConnections.Add(conservatory);
-            libraryConnections.Add(mainHall);
-            adjacency["library"] = libraryConnections;
-
-            List<Vertex> conservatoryConnections = new List<Vertex>();
-            conservatoryConnections.Add(deck);
-            conservatoryConnections.Add(library);
-            adjacency["conservatory"] = conservatoryConnections;
-
-            //adjacency["Billiards"] = ;
-            List<Vertex> billiardsConnections = new List<Vertex>();
-            billiardsConnections.Add(gallery);
-            billiardsConnections.Add(bathroom);
-            adjacency["billiards"] = billiardsConnections;
-
-            List<Vertex> bathroomConnections = new List<Vertex>();
-            bathroomConnections.Add(study);
-            bathroomConnections.Add(billiards);
-            adjacency["bathroom"] = bathroomConnections;
-
-            List<Vertex> studyConnections = new List<Vertex>();
-            studyConnections.Add(mainHall);
-            studyConnections.Add(bathroom);
-            studyConnections.Add(ballRoom);
-            adjacency["study"] = studyConnections;
-
-            List<Vertex> galleryConnections = new List<Vertex>();
-            galleryConnections.Add(billiards);
-            galleryConnections.Add(ballRoom);
-            galleryConnections.Add(mainHall);
-            adjacency["gallery"] = galleryConnections;
-
-            List<Vertex> deckConnections = new List<Vertex>();
-            deckConnections.Add(exit);
-            deckConnections.Add(conservatory);
-            deckConnections.Add(mainHall);
-            adjacency["deck"] = deckConnections;
-
-            List<Vertex> diningConnections = new List<Vertex>();
-            diningConnections.Add(kitchen);
-            diningConnections.Add(mainHall);
-            adjacency["dining Room"] = diningConnections;
-
-            List<Vertex> kitchenConnections = new List<Vertex>();
-            kitchenConnections.Add(diningRoom);
-            adjacency["kitchen"] = kitchenConnections;
-
-            List<Vertex> ballroomConnections = new List<Vertex>();
-            ballroomConnections.Add(mainHall);
-            ballroomConnections.Add(gallery);
-            ballroomConnections.Add(study);
-            adjacency["ballroom"] = ballroomConnections;
-
-            List<Vertex> exitConnections = new List<Vertex>();
-            exitConnections.Add(deck);
-            adjacency["exit"] = exitConnections;
-            #endregion
 
             //PART2 - Using a matrix
             adjMatrix = new int[,]
